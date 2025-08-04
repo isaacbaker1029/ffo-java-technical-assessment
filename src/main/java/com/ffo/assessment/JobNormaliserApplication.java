@@ -23,7 +23,7 @@ public class JobNormaliserApplication implements CommandLineRunner {
         System.out.println("\n--- RUNNING NORMALISATION TEST ---");
 
         // Let's call your method with a test input
-        String result = normalisationService.normalise("Java engineer");
+        String result = normalisationService.normalise("C# engineer");
 
         System.out.println("\nNormalisation result: '" + result + "'");
         System.out.println("--- TEST COMPLETE ---\n");

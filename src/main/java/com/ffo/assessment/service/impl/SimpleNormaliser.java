@@ -42,6 +42,8 @@ public class SimpleNormaliser implements NormalisationService {
             // 3. Calculate the similarity score
             double currentScore = similarityAlgorithm.apply(cleanedInput, normalisedTitle.toLowerCase());
 
+            System.out.printf("Name: %s, Score: %f\n",normalisedTitle, currentScore);
+
             // 4. Check if this is the best score so far
             if (currentScore > highestScore) {
                 highestScore = currentScore;
