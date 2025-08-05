@@ -40,6 +40,24 @@ class SimpleNormaliserTest {
         assertEquals(expected, result);
     }
 
+    // No Matches
+    @ParameterizedTest(name = "Input: ''{0}''")
+    @ValueSource(strings = {"Doctor", "Plumber"})
+    void normalise_shouldReturnOriginalInputForNoMatch(String input) {
+        assertEquals(input, normaliser.normalise(input));
+    }
+
+    // Edge cases (mixed cases or whitespace)
+    @ParameterizedTest(name = "Input: ''{0}'' -> Expected: ''{1}''")
+    @CsvSource({
+            "jAvA eNgInEeR,      Software engineer",
+            "'  Java engineer  ',  Software engineer",
+            "'Chief Accountant\t', Accountant"
+    })
+    void normalise_shouldHandleFormattingEdgeCases(String input, String expected) {
+        assertEquals(expected, normaliser.normalise(input));
+    }
+
     // NULL or Blank String
     @ParameterizedTest(name = "Input: ''{0}''")
     @NullAndEmptySource
@@ -63,15 +81,12 @@ class SimpleNormaliserTest {
         // Since "Architect" appears first in our config list, it should win the tie.
         String expected = "Architect";
 
-        // Act
         String result = normaliserWithFakeScore.normalise(input);
-
-        // Assert
         assertEquals(expected, result);
     }
 
     // This allows us to make use of our new parameterized testing and implement a fake similarity score when we have competing scores for an input
-    // Should return the first, 'architect'
+    // Should return the first
     private static class FakeTieBreakingScore implements SimilarityScore<Double> {
         @Override
         public Double apply(CharSequence left, CharSequence right) {
