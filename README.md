@@ -19,7 +19,7 @@ A Spring Boot application to normalize arbitrary job title strings against a con
 Clone the Repository
 
 ```
-git clone <your-repo-url>
+git clone https://github.com/isaacbaker1029/ffo-java-technical-assessment.git
 cd job-normaliser
 ```
 
