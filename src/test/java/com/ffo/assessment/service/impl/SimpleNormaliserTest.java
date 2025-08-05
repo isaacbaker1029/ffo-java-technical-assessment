@@ -2,6 +2,7 @@ package com.ffo.assessment.service.impl;
 
 import com.ffo.assessment.service.NormalisationService;
 import org.apache.commons.text.similarity.SimilarityScore;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -28,6 +29,7 @@ class SimpleNormaliserTest {
     private double qualityScoreFromConfig;
 
     // Happy Path
+    @DisplayName("Should normalise happy path inputs to the correct title")
     @ParameterizedTest(name = "Input: ''{0}'', Expected: ''{1}''")
     @CsvSource({
             "Java engineer,    Software engineer",
@@ -41,6 +43,7 @@ class SimpleNormaliserTest {
     }
 
     // No Matches
+    @DisplayName("Should return original input when no quality match is found")
     @ParameterizedTest(name = "Input: ''{0}''")
     @ValueSource(strings = {"Doctor", "Plumber"})
     void normalise_shouldReturnOriginalInputForNoMatch(String input) {
@@ -48,6 +51,7 @@ class SimpleNormaliserTest {
     }
 
     // Edge cases (mixed cases or whitespace)
+    @DisplayName("Should normalise inputs with mixed casing or whitespace")
     @ParameterizedTest(name = "Input: ''{0}'' -> Expected: ''{1}''")
     @CsvSource({
             "jAvA eNgInEeR,      Software engineer",
@@ -59,6 +63,7 @@ class SimpleNormaliserTest {
     }
 
     // NULL or Blank String
+    @DisplayName("Should return original input for null, empty, or blank strings")
     @ParameterizedTest(name = "Input: ''{0}''")
     @NullAndEmptySource
     @ValueSource(strings = {"  ", "\t", "\n"})
@@ -68,6 +73,7 @@ class SimpleNormaliserTest {
     }
 
     // Tie-Breaker
+    @DisplayName("Should return the first best match when similarity scores are tied")
     @Test
     void normalise_shouldReturnFirstBestMatch_whenScoresAreTied() {
         // Arrange: Create our own Normaliser instance with the fake algorithm
