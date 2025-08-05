@@ -20,13 +20,15 @@ public class JobNormaliserApplication implements CommandLineRunner {
     // This run method will be executed automatically after the application starts
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("\n--- RUNNING NORMALISATION TEST ---");
-
-        // Let's call your method with a test input
-        String result = normalisationService.normalise("C# engineer");
-
-        System.out.println("\nNormalisation result: '" + result + "'");
-        System.out.println("--- TEST COMPLETE ---\n");
+        // Using the sample code given
+        String jt = "Java engineer";
+        String normalisedTitle = normalisationService.normalise(jt);
+        System.out.println(normalisedTitle);
+        jt = "C# engineer";
+        normalisedTitle = normalisationService.normalise(jt);
+        System.out.println(normalisedTitle);
+        jt = "Chief Accountant";
+        normalisedTitle = normalisationService.normalise(jt);
+        System.out.println(normalisedTitle);
     }
-
 }
