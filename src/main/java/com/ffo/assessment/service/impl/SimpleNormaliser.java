@@ -34,6 +34,7 @@ public class SimpleNormaliser implements NormalisationService {
     public String normalise(String inputTitle) {
         // 1. Check for null/blank inputs
         if (inputTitle == null || inputTitle.trim().isEmpty()) {
+            logger.debug("String passed is empty or NULL, returning early");
             return inputTitle;
         }
 

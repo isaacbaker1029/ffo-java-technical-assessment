@@ -40,6 +40,15 @@ class SimpleNormaliserTest {
         assertEquals(expected, result);
     }
 
+    // NULL or Blank String
+    @ParameterizedTest(name = "Input: ''{0}''")
+    @NullAndEmptySource
+    @ValueSource(strings = {"  ", "\t", "\n"})
+    void normalise_shouldHandleNullAndBlankInputs(String input) {
+        String result = normaliser.normalise(input);
+        assertEquals(input, result);
+    }
+
     // Tie-Breaker
     @Test
     void normalise_shouldReturnFirstBestMatch_whenScoresAreTied() {
